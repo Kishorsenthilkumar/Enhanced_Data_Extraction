@@ -1,1 +1,37 @@
- 
+ !DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Node.js App</title>
+</head>
+<body>
+    <h1>Welcome to My Node.js App!</h1>
+    <p>This is a simple Node.js application using Express.</p>
+
+    <h2>Submit Data for Scraping</h2>
+    <form id="scrapeForm">
+        <input type="text" id="url" placeholder="Enter URL to scrape" required>
+        <button type="submit">Scrape</button>
+    </form>
+
+    <script>
+        document.getElementById('scrapeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = document.getElementById('url').value;
+
+            const response = await fetch('/scrape', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer your_token_here' // Replace with actual token
+                },
+                body: JSON.stringify({ url })
+            });
+
+            const result = await response.json();
+            alert(JSON.stringify(result.data));
+        });
+    </script>
+</body>
+</html> 
